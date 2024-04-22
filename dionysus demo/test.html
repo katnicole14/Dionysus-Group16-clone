@@ -1,0 +1,92 @@
+
+  <!-- Modal -->
+  <div class="modal fade" id="updateWineModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+
+            <!-- THIS IS THE DATA VALUES TO BE BE FILLED IN TO update WINE-->
+            <div class="container">
+                <form id="updateWineForm" >
+                    <h5 class="modal-title" id="exampleModalLongTitle">Update a Wine</h5>
+
+                    <!-- define the label that will hold the ID of the wine-->
+                    <label for="Wine_ID" id="labelWineID">Wine ID:</label>
+
+                  <div class="form-group">
+                    <label for="name">Wine Name:</label>
+                    <input type="text" class="form-control" id="nameUpdate" placeholder="Enter name">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="description">Wine Description:</label>
+                    <input type="text" class="form-control" id="descriptionUpdate" placeholder="Enter description">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="year">Year:</label>
+                    <input type="date" class="form-control" id="yearUpdate">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="region">Region:</label>
+                    <input type="text" class="form-control" id="regionUpdate" placeholder="Enter region">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="food_pairing">Food pairing:</label>
+                    <input type="text" class="form-control" id="food_pairingUpdate" placeholder="Enter food pairings">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="image">Image Link:</label>
+                    <input type="text" class="form-control" id="imageUpdate" placeholder="Enter wine image">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="sub-type">Sub-type:</label>
+                    <input type="text" class="form-control" id="sub-typeUpdate" placeholder="Enter wine's sub-type eg. Pinot Noir, Babera, Syrah">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" class="form-control" id="priceUpdate" placeholder="Enter price">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="quality">Quality (1 - 10):</label>
+                    <input type="range" class="form-control-range" id="qualityUpdate" min="1" max="10">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select class="form-control" id="category">
+                      <option value="red">red</option>
+                      <option value="sparkling">sparkling</option>
+                      <option value="white">white</option>
+                    </select>
+                  </div>
+
+                
+
+                 <!--  <button type="submit" class="btn btn-primary">Submit</button> -->
+                </form>
+              </div>
+              <!-- THIS IS THE DATA VALUES TO BE BE FILLED IN-->
+
+
+         
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">x</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveChangesButton">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
