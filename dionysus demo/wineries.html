@@ -1,479 +1,393 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="src/img/icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Dionysus Wineries</title>
-  <style>
-    .wineries-heading {
-      margin: 25px;
-    }
-    .mainSection{
-        display: flex;
-    }
-    .left-section {
-      width: 25%;
-      float: left;
-      padding-left: 250px;
-    }
-    .right-section {
-      width: 75%;
-      float: right;
-      padding: 25px;
-      
-    }
-    .titleText {
-    text-align: center;
-  }
-  .centered-div {
-    justify-content: space-between;
-   /*  position: absolute; */
-   /*  top: 50%; */
-   /*  left: 50%; */
-   /*  transform: translate(-50%, -50%); */
-  }
 
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 
-/*     .footer {
-      background-color: #222222;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-    .footer img {
-      height: 20px;
-      margin: 5px;
-    }
-    .footer p {
-      font-size: 12px;
-    } */
-  .footer img {
-    height: 20px;
-    margin: 5px;
-  }
-  .footer p {
-    font-size: 12px;
-  }
-    .item {
-    width: 55%;
-    /* float: left; */
-    margin-bottom: 25px;
-  }
-  .item h3 {
-    margin-top: 0;
-  }
-  .item img {
-    width: 100%;
-    height: auto;
-  }
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
-  /*stylling for dynamically added wine pages*/
-  .winery {
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-
-    .winery-name {
-      font-weight: bold;
-    }
-
-    .winery-image {
-      max-width: 70%;
-      margin-top: 10px;
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- 
- 
-  <link rel="stylesheet" href="wineries.css">
+  <link rel="stylesheet" href="src/style/main.css">
 </head>
+
 <body>
-  <div class ="mainBodyDiv">
-  <div class="navbar header">
-    <div>
-      <span><h2>Dionysus</h2></span>
+  <!-- Collapsible Navigation bar -->
+  <nav class="navbar navbar-expand-sm bg-body-tertiary px-0 py-0" data-bs-theme="dark">
+    <div class="container-fluid py-2" style="
+      background-color: #722f37;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    ">
+      <a class="navbar-brand" href="home.html">Dionysus</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#dropDownProvince">Filter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="wines.html">Wines</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="wineries.html">Wineries</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="owners.html">Management</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <a href="#">Home</a>
-      <a href="#">Wines</a>
-      <a href="#">Wineries</a>
-      <a href="#">About</a>
+  </nav>
+
+  <div id="mainWineriesContent" class="container text-dark" style="padding-top: 60px;">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-between align-items-center mb-3">
+        <h1 class="titleText text-center" style="flex: 1; text-align: center;">Wineries</h1>
+        <select id="dropDownProvince" title="Select Province" style="max-width: 200px;">
+          <option value="">Select Province</option>
+          <option value="Gauteng">Gauteng</option>
+          <option value="North West">North West</option>
+          <option value="Northern Cape">Northern Cape</option>
+          <option value="Western Cape">Western Cape</option>
+        </select>
+      </div>
+    </div>
+    <div id="right-section" >
+      <div id="wineryList"></div>
+      <div id="wineriesContainer"></div>
     </div>
   </div>
 
-  <div class="wineries-heading">
-    <h1 class="titleText">Wineries</h1>
+  <div class="footer" style="
+    background-color: #722f37;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    text-align: center;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  ">
+    <p style="margin: 0">CONNECT WITH US</p>
+    <div style="
+      margin: 5px 0;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    ">
+      <a href="#" class="bi bi-linkedin" style="color: white"></a>
+      <a href="#" class="bi bi-google" style="color: white"></a>
+      <a href="#" class="bi bi-facebook" style="color: white"></a>
+      <a href="#" class="bi bi-instagram" style="color: white"></a>
+      <a href="#" class="bi bi-twitter" style="color: white"></a>
+      <a href="#" class="bi bi-pinterest" style="color: white"></a>
+    </div>
+    <p style="margin: 0">Dionysus @2023</p>
   </div>
 
-<!-- <div class="mainSection centered-div">
-  <div class="left-section">
-    <h2>Province</h2>
-    
-  </div> -->
+  <!--end of divBottom-->
+  <script>
+    //............................................................
+    //FILTERING ACCORDING TO THE VALUES CHANGED IN THE DROP DOWN
+    //............................................................
 
-  <div class="left-section">
-    <h2>Province</h2>
-    <!--now comes the frop down menu with the values to the left-->
-    <select id="dropDownProvince">
-      <option value="">Select Province</option>
-      <option value="Eastern Cape">Eastern Cape</option>
-      <option value="Free State">Free State</option>
-      <option value="Gauteng">Gauteng</option>
-      <option value="KwaZulu-Natal">KwaZulu-Natal</option>
-      <option value="Limpopo">Limpopo</option>
-      <option value="Mpumalanga">Mpumalanga</option>
-      <option value="North West">North West</option>
-      <option value="Northern Cape">Northern Cape</option>
-      <option value="Western Cape">Western Cape</option>
-    </select>
-
-    
-  </div> <!--end of div main section-->
-
-
-  <div class="right-section">
-  <div class="image-container">
-
-    <!-- Add more items here -->
-    <!-- Example: -->
-    <!-- <div class="item">
-         <h3>Name of Winery 3</h3>
-         <img src="winery3.jpg" alt="Winery 3">
-         <p>Address of Winery 3</p>
-       </div> -->
-  </div>
-
-
-
-
-  <div id="wineryList"></div>
-  <div id="wineriesContainer"></div>
-
-
-
-
-</div><!-- end of right section div-->
-</div>
- 
-
-<div class="divBottom">
-  <div class="footer"  >
-    <p>CONNECT WITH US</p>
-    <a href="#" class="fa fa-linkedin"></a>
-    <a href="#" class="fa fa-google"></a>
-    <a href="#" class="fa fa-facebook"></a>
-    <a href="#" class="fa fa-instagram"></a>
-    <a href="#" class="fa fa-twitter"></a>
-    <a href="#" class="fa fa-pinterest"></a>
-    <br>
-    <p>Dionysus @2023</p>
-  </div>
-</div>
- <!--end of divBottom-->
-<script>
-window.onload = function() {//start of onload function *********************************************************************
-
-
-
-
-
-
-
-
-
-
-
-
-  tableName = "Winery";
-  var countTableVals = 0;
-  
-var allWineries;
-
-  getAllTable(tableName)
-  .then(AllTableValues => {
-      if (AllTableValues && AllTableValues.length > 0 && 'Winery_ID' in AllTableValues[0]) {
-        //meaning that we have fetched the data
-        
-        
-        allWineries = AllTableValues;
-        console.log("allWineries has been assigned",allWineries);
-
-          startAllLoading();
-
-          // Assign the fetched data to tableValuesSecond
-         // createTable(); // Call createTable function here to populate the table with fetched data
-      } else {
-          console.log('Data not in expected format');
+    //first we have a json object that has all winery values
+    const allWineryDataDummyValues = [
+      {
+        "Winery_ID": "1",
+        "Name": "Athonij Rupert Wyne",
+        "Address": "R45 Wine Route, Franschhoek Valley Groot Drakenstein 7690",
+        "City": "Franschhoek",
+        "Province": "Western Cape",
+        "Website": "https://www.shop.rupertwines.com/",
+        "Description": "Anthonij Rupert Wyne was founded on the farm L'Ormarins in Franschhoek and was originally owned by the late Anthonij Rupert. In 2003, his brother Johann Rupert took over the wine farm and the brand named after him.",
+        "Image": "https://www.shop.rupertwines.com/images/thumbs/0000449_HOME%20HEADER%20-%20TERRA%20DEL%20CAPO.jpeg"
+      },
+      {
+        "Winery_ID": "2",
+        "Name": "Waterford Estate",
+        "Address": "Upper Blaauwklippen Rd Stellenbosch, Western Cape 7550, South Africa",
+        "City": "Stallenbosch",
+        "Province": "Western Cape",
+        "Website": "https://www.waterfordestate.co.za/",
+        "Description": "Located in the scenic Blaauwklippen Valley in Stellenbosch, South Africa’s most famous wine-producing region, Waterford Estate is renowned for its spectacular views and exceptional wine-tasting experiences.",
+        "Image": "https://luxurygoldblog.wpenginepowered.com/wp-content/uploads/2023/05/waterford-estate-1024x686.jpg"
+      },
+      {
+        "Winery_ID": "3",
+        "Name": "Marianne Wine Estate",
+        "Address": "Valley Road, off the R44 Stellenbosch, Western Cape 7550, South Africa",
+        "City": "Stalenbosch",
+        "Province": "Western Cape",
+        "Website": "http://www.mariannewines.com/",
+        "Description": "Marianne Wines is a boutique winery in the Stellenbosch and Paarl area, influenced by French heritage and international savoir-faire.",
+        "Image": "https://www.winepaths.com/var/site/storage/images/_aliases/banner-image/0/1/5/1/21510-1-eng-GB/589246e613f83_904804_576121229087981_2112126554_o.jpg"
+      },
+      {
+        "Winery_ID": "4",
+        "Name": "Rupert & Rothschild Vignerons",
+        "Address": "Klapmuts-Simondium Road, Simondium 7670, Cape Town, South Africa",
+        "City": "Cape Town",
+        "Province": "Western Cape",
+        "Website": "https://rupert-rothschildvignerons.com/",
+        "Description": "At the foot of the spectacular Simonsberg mountain in the Franschhoek valley lies the historic French Huguenot farm Fredericksburg, established in 1690 and now home to Rupert & Rothschild Vignerons.",
+        "Image": "https://www.winepaths.com/var/site/storage/images/_aliases/front-gallery/0/8/8/5/75880-1-eng-GB/597b1f2d5fdb7_TX9A3679.jpg"
+      },
+      {
+        "Winery_ID": "5",
+        "Name": "Klein Constantia Estate",
+        "Address": "37 Klein Constantia Road Constantia 7708",
+        "City": "Cape Town",
+        "Province": "Western Cape",
+        "Website": "https://www.kleinconstantia.com/",
+        "Description": "Described as one of the world's most beautiful vineyards, Klein Constantia is set amidst ancient trees and lush greenery on the upper foothills of the Constantiaberg, with superb views across the Constantia Valley and False Bay.",
+        "Image": "https://www.kleinconstantia.com/wp-content/gallery/gallery/Klein-Constantia_0010.jpg"
+      },
+      {
+        "Winery_ID": "6",
+        "Name": "Mont Rochelle Hotel & Vineyard",
+        "Address": "Dassenberg Road, Franschhoek, 7690, South Africa",
+        "City": "Franschooek",
+        "Province": "Western Cape",
+        "Website": "https://www.virginlimitededition.com/en/mont-rochelle",
+        "Description": "Mont Rochelle, a stunning 26-bedroom hotel and vineyard in Franschooek, just under one hour's drive from Cape Town. This traditional vineyard town is famously known as the French Corner and is considered to be the food and wine capital of South Africa.",
+        "Image": "https://b-cdn.springnest.com/media/img/aw/cellar44f11a9.jpeg?width=800"
+      },
+      {
+        "Winery_ID": "7",
+        "Name": "Bezalel Wine & Brandy Estate",
+        "Address": "N14-Highway, Dyasonsklip-settlement, Northern Cape, 8805",
+        "City": "Dyasonsklip",
+        "Province": "Northern Cape",
+        "Website": "https://www.bezalel.co.za/",
+        "Description": "Bezalel Wine & Brandy Estate offers visitors true Green Kalahari hospitality through our visitors center. Take an informative tour of our Distillery and learn about the ancient art of fine Brandy making.",
+        "Image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/45/7a/ef/bezalel-wine-brandy-estate.jpg?w=900&h=-1&s=1"
+      },
+      {
+        "Winery_ID": "8",
+        "Name": "Die Mas van Kakamas",
+        "Address": "Stand 304, Augrabies Road, Kakamas, 8870",
+        "City": "Kakamas",
+        "Province": "Northern Cape",
+        "Website": "https://www.diemas.co.za/",
+        "Description": "Die Mas is a tranquil destination on the Orange River bank in the town Kakamas, a mere 80km from Upington in the Northern Cape Province. The region boasts unique climatic conditions, where the waters of the powerful Orange River and the clear African skies bring life to the rich soil of the semi-desert region. This is where we grow our main crops of grapes.",
+        "Image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/b9/1a/c3/caption.jpg?w=1200&h=-1&s=1"
+      },
+      {
+        "Winery_ID": "9",
+        "Name": "Orange River Cellars",
+        "Address": "158 Schröder Street, Middelpos, Upington, 8800",
+        "City": "Upington",
+        "Province": "Northern Cape",
+        "Website": "https://orangeriverwines.com/?v=ed164f3fda55",
+        "Description": "The wine grapes of Orange River Cellars originate from ±580 expert grape farmers all along the Orange River, also known as the Great Gariep River. These pockets of vineyard land stretch over a distance of more than 300 kilometers between Groblershoop and Blouputs.",
+        "Image": "https://gauteng.net/news/wp-content/uploads/2023/10/senior-man-with-young-woman-tasting-wine-on-the-vi-2022-01-18-23-48-07-utc-_1_-1200x801.webp"
+      },
+      {
+        "Winery_ID": "10",
+        "Name": "The Tasting Room",
+        "Address": "198 Long Street Waterkloof Pretoria",
+        "City": "Waterkloof ",
+        "Province": "Gauteng",
+        "Website": "https://thetastingroom.co.za/home",
+        "Description": "The Tasting Room is a concept born of a sunny afternoon's wine tasting in the Cape Winelands. It aims to bring the flavours and atmosphere of a tasting experience in the Cape's finest vineyards to Gauteng.",
+        "Image": "https://api.thetastingroom.co.za//site_images/20221017145552.jpg"
+      },
+      {
+        "Winery_ID": "11",
+        "Name": "The Vaal River Meander",
+        "Address": "88 Fourth Street, The Vaal",
+        "City": "Vaal River",
+        "Province": "Gauteng",
+        "Website": "https://www.facebook.com/VaalWineRoute/",
+        "Description": "Gauteng's very own Wine Route turns 19yrs! Experience wine tasting on & around the Vaal River area",
+        "Image": "https://www.shop.rupertwines.com/images/thumbs/0000588_Protea_1.png"
+      },
+      {
+        "Winery_ID": "12",
+        "Name": "Abingdon Wine Estate",
+        "Address": "45 Voortrekker Road, Durbanville",
+        "City": "Cape Town",
+        "Province": "Western Cape",
+        "Website": "https://www.facebook.com/VaalWineRoute/",
+        "Description": "We are united in our passion to reflect the Durbanville terroir in all our wines. The result is a magnificent range of intense, fruit-driven yet elegant wines, as different from each other as the slopes that create them and the individual personalities who craft them.",
+        "Image": "https://durbanvillewine.co.za/wp-content/uploads/2021/01/intro_blck-1.jpg"
       }
-  })
-  .catch(error => {
-      console.error(error);
-  });
+
+    ]//end of allWineriesDummyValues variable
+    var allWineries = allWineryDataDummyValues;
+
+    function loadAllDataOnLoad() {
+
+      var container = document.getElementById('wineriesContainer');
+
+      allWineries.forEach(function (winery) {
+        var wineryDiv = document.createElement('div');
+        wineryDiv.className = 'winery container pb-5';
+
+        var nameElement = document.createElement('h3');
+        nameElement.className = 'winery-name text-dark';
+        nameElement.textContent = winery.Name;
+        wineryDiv.appendChild(nameElement);
+
+        var imageElement = document.createElement('img');
+        imageElement.className = 'winery-image img-fluid mb-3 col-lg-12';
+        imageElement.src = winery.Image;
+        wineryDiv.appendChild(imageElement);
+
+        var descriptElement = document.createElement('h5');
+        descriptElement.className = 'text-dark pb-2';
+        descriptElement.textContent = '' + winery.Description;
+        wineryDiv.appendChild(descriptElement);
+
+        var addressElement = document.createElement('p');
+        addressElement.className = 'text-dark';
+        addressElement.textContent = '' + winery.Address;
+        wineryDiv.appendChild(addressElement);
+
+        var cityElement = document.createElement('p');
+        cityElement.className = 'text-dark';
+        cityElement.textContent = '' + winery.City;
+        wineryDiv.appendChild(cityElement);
+
+        var provinceElement = document.createElement('p');
+        provinceElement.className = 'text-dark';
+        provinceElement.textContent = '' + winery.Province;
+        wineryDiv.appendChild(provinceElement);
+
+        var linkElement = document.createElement('a');
+        linkElement.className = 'link-dark py-2';
+        linkElement.href = winery.Website;
+        linkElement.textContent = 'Visit the ' + winery.Name + ' website';
+        wineryDiv.appendChild(linkElement);
+
+        container.appendChild(wineryDiv);
+      });
 
 
-
-
-
-
-
-
-function startAllLoading() {
-
- //........................................................................................................
-//                     start of start all loading function                                           
-//........................................................................................................
-
-
-
-
-  //............................................................
-  //FILTERING ACCORDING TO THE VALUES CHANGED IN THE DROP DOWN
-  //............................................................
-
-  //first we have a json object that has all winery values
-  const allWineryDataDummyValues = [
-    {
-      "Winery_ID": "1",
-      "Name": "Jim Harris Wines",
-      "Address": "Address 1",
-      "City": "City 1",
-      "Province": "Eastern Cape",
-      "Verification": true,
-      "Description": "Description 1",
-      "Image": "https://images.unsplash.com/photo-1682687221213-56e250b36fdd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-    },
-    {
-      "Winery_ID": "2",
-      "Name": "Stellenbosch Vineyards",
-      "Address": "Address 2",
-      "City": "City 2",
-      "Province": "Gauteng",
-      "Verification": false,
-      "Description": "Description 2",
-      "Image": "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-    },
-    {
-      "Winery_ID": "3",
-      "Name": "Winery 3",
-      "Address": "Address 3",
-      "City": "City 3",
-      "Province": "Western Cape",
-      "Verification": true,
-      "Description": "Description 3",
-      "Image": "https://images.unsplash.com/photo-1464638681273-0962e9b53566?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-    },
-    {
-      "Winery_ID": "4",
-      "Name": "Winery 4",
-      "Address": "Address 4",
-      "City": "City 4",
-      "Province": "KwaZulu-Natal",
-      "Verification": true,
-      "Description": "Description 4",
-      "Image": "https://images.unsplash.com/photo-1486754735734-325b5831c3ad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-    },
-    {
-      "Winery_ID": "5",
-      "Name": "Winery 5",
-      "Address": "Address 5",
-      "City": "City 5",
-      "Province": "Northern Cape",
-      "Verification": false,
-      "Description": "Description 5",
-      "Image": "https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
-    },
-    {
-      "Winery_ID": "6",
-      "Name": "Winery 6",
-      "Address": "Address 6",
-      "City": "City 6",
-      "Province": "Mpumalanga",
-      "Verification": true,
-      "Description": "Description 6",
-      "Image": "https://images.unsplash.com/photo-1602170284347-f9c28856f149?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1031&q=80"
-    },
-    {
-      "Winery_ID": "7",
-      "Name": "Winery 7",
-      "Address": "Address 7",
-      "City": "City 7",
-      "Province": "Limpopo",
-      "Verification": false,
-      "Description": "Description 7",
-      "Image": "https://images.unsplash.com/photo-1515779122185-2390ccdf060b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-    },
-    {
-      "Winery_ID": "8",
-      "Name": "Winery 8",
-      "Address": "Address 8",
-      "City": "City 8",
-      "Province": "North West",
-      "Verification": true,
-      "Description": "Description 8",
-      "Image": "https://images.unsplash.com/photo-1542159919831-40fb0656b45a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHN1bnNldHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
-    },
-    {
-      "Winery_ID": "9",
-      "Name": "Winery 9",
-      "Address": "Address 9",
-      "City": "City 9",
-      "Province": "Free State",
-      "Verification": true,
-      "Description": "Description 9",
-      "Image": "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHN1bnNldHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
-    },
-    {
-      "Winery_ID": "10",
-      "Name": "Winery 10",
-      "Address": "Address 10",
-      "City": "City 10",
-      "Province": "Eastern Cape",
-      "Verification": false,
-      "Description": "Description 10",
-      "Image": "https://images.unsplash.com/photo-1682687220566-5599dbbebf11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxzZWFyY2h8NDJ8fHN1bnNldHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
     }
-    // Add more wineries here...
-  ]//end of allWineriesDummyValues variable
-  // allWineries = allWineryDataDummyValues;
 
-  function loadAllDataOnLoad() {
+    loadAllDataOnLoad();
 
-    var container = document.getElementById('wineriesContainer');
+    var provinceDropdown = document.getElementById("dropDownProvince");
+    provinceDropdown.addEventListener("change", updateCities);
 
-
-
-allWineries.forEach(function(winery) {
-var wineryDiv = document.createElement('div');
-wineryDiv.className = 'winery';
-
-var nameElement = document.createElement('p');
-nameElement.className = 'winery-name';
-nameElement.textContent = winery.Name;
-wineryDiv.appendChild(nameElement);
-
-var imageElement = document.createElement('img');
-imageElement.className = 'winery-image';
-imageElement.src = winery.Image;
-wineryDiv.appendChild(imageElement);
-
-var addressElement = document.createElement('p');
-addressElement.textContent = 'Address: ' + winery.Address;
-wineryDiv.appendChild(addressElement);
-
-var cityElement = document.createElement('p');
-cityElement.textContent = 'City: ' + winery.City;
-wineryDiv.appendChild(cityElement);
-
-var provinceElement = document.createElement('p');
-provinceElement.textContent = 'Province: ' + winery.Province;
-wineryDiv.appendChild(provinceElement);
-
-container.appendChild(wineryDiv);
-});
-
-    
-  }
-
-  loadAllDataOnLoad();
-
-  var provinceDropdown = document.getElementById("dropDownProvince");
-      provinceDropdown.addEventListener("change", updateCities);
-
-      function updateCities() {
-        var cityDropdown = document.getElementById("dropDownCity");
-        var province = provinceDropdown.value;
+    function updateCities() {
+      var cityDropdown = document.getElementById("dropDownCity");
+      var province = provinceDropdown.value;
 
 
-        wineryList.innerHTML = "";
+      wineryList.innerHTML = "";
 
 
-        if (province === "") {
-          return;
-        }
-        else //otherwise you have to load all the values in the city
-        {
+      if (province === "") {
+        return;
+      }
+      else //otherwise you have to load all the values in the city
+      {
 
-          
-          selectedProvince = province;
-          //winery has name , addresss, city , province,zip code,country
 
-          var selectWineryValues = [];
-          //now for every winery meeting our criteria, add it to the selectWineryValues var
-          for (var i = 0; i < allWineries.length; i++) {
-        var winery = allWineries[i];
-        if (winery.Province === selectedProvince) {
-          selectWineryValues.push(winery)
-          var wineryInfo = document.createElement("p");
-       //   wineryInfo.textContent = "Winery ID: " + winery.Winery_ID + ", Name: " + winery.Name + ", Address: " + winery.Address + ", City: " + winery.City + ", Province: " + winery.Province;
-          wineryList.appendChild(wineryInfo);
-            }
+        selectedProvince = province;
+        //winery has name , addresss, city , province,zip code,country
+
+        var selectWineryValues = [];
+        //now for every winery meeting our criteria, add it to the selectWineryValues var
+        for (var i = 0; i < allWineries.length; i++) {
+          var winery = allWineries[i];
+          if (winery.Province === selectedProvince) {
+            selectWineryValues.push(winery)
+            var wineryInfo = document.createElement("p");
+            wineryInfo.textContent = "Winery ID: " + winery.Winery_ID + ", Name: " + winery.Name + ", Address: " + winery.Address + ", City: " + winery.City + ", Province: " + winery.Province;
+            //wineryList.appendChild(wineryInfo);
+            console.log(wineryInfo);
           }
+        }
 
-          var container = document.getElementById('wineriesContainer');
-          //first - before anything else - clear all the content in this div
-          container.innerHTML='';
-
-
-                  selectWineryValues.forEach(function(winery) {
-              var wineryDiv = document.createElement('div');
-              wineryDiv.className = 'winery';
-
-              var nameElement = document.createElement('p');
-              nameElement.className = 'winery-name';
-              nameElement.textContent = winery.Name;
-              wineryDiv.appendChild(nameElement);
-
-              var imageElement = document.createElement('img');
-              imageElement.className = 'winery-image';
-              imageElement.src = winery.Image;
-              wineryDiv.appendChild(imageElement);
-
-              var addressElement = document.createElement('p');
-              addressElement.textContent = 'Address: ' + winery.Address;
-              wineryDiv.appendChild(addressElement);
-
-              var cityElement = document.createElement('p');
-              cityElement.textContent = 'City: ' + winery.City;
-              wineryDiv.appendChild(cityElement);
-
-              var provinceElement = document.createElement('p');
-              provinceElement.textContent = 'Province: ' + winery.Province;
-              wineryDiv.appendChild(provinceElement);
-
-              container.appendChild(wineryDiv);
-            });
-                }
-      }//end of updateCities funciton
+        var container = document.getElementById('wineriesContainer');
+        //first - before anything else - clear all the content in this div
+        container.innerHTML = '';
 
 
+        selectWineryValues.forEach(function (winery) {
+
+          var wineryDiv = document.createElement('div');
+          wineryDiv.className = 'winery container pb-5';
+
+          var nameElement = document.createElement('h3');
+          nameElement.className = 'winery-name text-dark';
+          nameElement.textContent = winery.Name;
+          wineryDiv.appendChild(nameElement);
+
+          var imageElement = document.createElement('img');
+          imageElement.className = 'winery-image img-fluid col-md-12';
+          imageElement.src = winery.Image;
+          wineryDiv.appendChild(imageElement);
 
 
-
- //........................................................................................................
-//                           end of start all loading function                                           
-//........................................................................................................
-
-
-}
+          var descriptElement = document.createElement('h5');
+          descriptElement.className = 'text-dark pb-2';
+          descriptElement.textContent = '' + winery.Description;
+          wineryDiv.appendChild(descriptElement);
 
 
+          var addressElement = document.createElement('p');
+          addressElement.className = 'text-dark';
+          addressElement.textContent = 'Address: ' + winery.Address;
+          wineryDiv.appendChild(addressElement);
 
+          var cityElement = document.createElement('p');
+          cityElement.className = 'text-dark';
+          cityElement.textContent = 'City: ' + winery.City;
+          wineryDiv.appendChild(cityElement);
 
+          var provinceElement = document.createElement('p');
+          provinceElement.className = 'text-dark';
+          provinceElement.textContent = 'Province: ' + winery.Province;
+          wineryDiv.appendChild(provinceElement);
 
+          var linkElement = document.createElement('a');
+          linkElement.className = 'link-dark py-2';
+          linkElement.href = winery.Website;
+          linkElement.textContent = 'Visit the ' + winery.Name + ' website';
+          wineryDiv.appendChild(linkElement);
 
+          container.appendChild(wineryDiv);
+        });
+      }
+    }//end of updateCities funciton
 
-
-
-}//end of onload funciton *************************************************
-</script>
-
-
-<!-- adding link to backend/ajax file-->
-<script type="text/javascript" src="backend/scripts/ajax.js"></script>
-<!-- adding link to backend/ajax file-->
-
-
-</div><!--end of the main body div-->
+  </script>
+  </div><!--end of the main body div-->
 </body>
 
 
